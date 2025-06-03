@@ -57,13 +57,13 @@ export default function WeatherChart({ data }: Props) {
     ],
   };
 
-  const chartOptions: unknown = {
+  const chartOptions = {
     responsive: true,
     plugins: {
       title: {
         display: true,
         text: "Daily Temperature Trends",
-        font: { size: 18, weight: "bold" },
+        font: { size: 18, weight: "bold" as const },
       },
       legend: {
         position: "top" as const,
