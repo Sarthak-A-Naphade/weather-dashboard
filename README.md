@@ -6,7 +6,7 @@ This is a responsive weather dashboard built using **React (Next.js)** and **Tai
 
 ## 🚀 Live Demo
 
-🔗 [View Live on Vercel](https://your-vercel-url.vercel.app/)
+🔗 [View Live on Vercel](https://weather-dashboard-two-olive.vercel.app/)
 
 ---
 
