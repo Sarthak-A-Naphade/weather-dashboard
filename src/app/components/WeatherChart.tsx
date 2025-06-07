@@ -10,19 +10,17 @@ import {
   Tooltip,
   Legend,
   CategoryScale,
-  plugins,
 } from "chart.js";
 import { WeatherData } from "../utils/api";
 
-  ChartJS.register(
+ChartJS.register(
   LineElement,
   PointElement,
   LinearScale,
   Title,
   Tooltip,
   Legend,
-  CategoryScale,
-  plugins
+  CategoryScale
 );
 
 interface Props {
@@ -59,14 +57,28 @@ export default function WeatherChart({ data }: Props) {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
+    },
     plugins: {
       title: {
         display: true,
         text: "Daily Temperature Trends",
-        font: { size: 18, weight: "bold" as const },
+        font: { 
+          size: window.innerWidth < 640 ? 14 : 18,
+          weight: "bold" as const 
+        },
       },
       legend: {
         position: "top" as const,
+        labels: {
+          boxWidth: window.innerWidth < 640 ? 12 : 20,
+          font: {
+            size: window.innerWidth < 640 ? 10 : 12,
+          }
+        }
       },
     },
     scales: {
@@ -75,19 +87,39 @@ export default function WeatherChart({ data }: Props) {
         title: {
           display: true,
           text: "Temperature (°C)",
+          font: {
+            size: window.innerWidth < 640 ? 10 : 12,
+          }
         },
+        ticks: {
+          font: {
+            size: window.innerWidth < 640 ? 9 : 11,
+          }
+        }
       },
       x: {
         title: {
           display: true,
           text: "Date",
+          font: {
+            size: window.innerWidth < 640 ? 10 : 12,
+          }
         },
+        ticks: {
+          maxTicksLimit: window.innerWidth < 640 ? 5 : 10,
+          font: {
+            size: window.innerWidth < 640 ? 9 : 11,
+          }
+        }
       },
     },
   };
+
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md space-y-4 max-w-full h-80 sm:h-96 lg:h-[450px] overflow-x-auto overflow-y-auto">
-      <Line data={chartData} options={chartOptions} />
+    <div className="bg-white p-3 sm:p-6 rounded-2xl shadow-md w-full">
+      <div className="relative h-64 sm:h-80 lg:h-96 w-full">
+        <Line data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 }
