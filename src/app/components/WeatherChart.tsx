@@ -86,7 +86,7 @@ export default function WeatherChart({ data }: Props) {
     },
   };
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-2xl shadow-md space-y-4 max-w-full h-80 sm:h-96 lg:h-[450px] overflow-x-auto overflow-y-auto">
       <Line data={chartData} options={chartOptions} />
     </div>
   );
